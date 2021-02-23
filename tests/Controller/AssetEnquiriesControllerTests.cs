@@ -4,13 +4,13 @@ using Xunit;
 
 namespace track_a_report_service_tests.Controllers
 {
-    public class HomeControllerTests
+    public class AssetEnquiriesControllerTests
     {
-        private readonly HomeController _homeController;
+        private readonly AssetEnquiriesController _homeController;
 
-        public HomeControllerTests()
+        public AssetEnquiriesControllerTests()
         {
-            _homeController = new HomeController();
+            _homeController = new AssetEnquiriesController();
         }
 
         [Fact]

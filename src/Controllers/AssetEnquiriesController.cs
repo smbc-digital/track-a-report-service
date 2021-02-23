@@ -7,9 +7,9 @@ namespace track_a_report_service.Controllers
     [Route("api/v1/[Controller]")]
     [ApiController]
     [TokenAuthentication]
-    public class HomeController : ControllerBase
+    public class AssetEnquiriesController : ControllerBase
     {
-        public HomeController(){}
+        public AssetEnquiriesController(){}
 
         [HttpGet]
         public IActionResult Get()
