@@ -11,12 +11,6 @@ namespace track_a_report_service.Controllers
     {
         public AssetEnquiriesController(){}
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok();
-        }
-
         [HttpPost]
         public IActionResult Post()
         {

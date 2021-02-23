@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockportGovUK.NetStandard.Gateways;
 using StockportGovUK.NetStandard.Gateways.Extensions;
+using track_a_report_service.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace track_a_report_service
 {
@@ -26,6 +28,8 @@ namespace track_a_report_service
             services.AddControllers()
                     .AddNewtonsoftJson();
             services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
+            services.AddDbContext<InthubContext>(_ => _
+                        .UseSqlServer(Configuration.GetConnectionString("AssetEnquiries")), ServiceLifetime.Transient);
             services.AddSwagger();
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
