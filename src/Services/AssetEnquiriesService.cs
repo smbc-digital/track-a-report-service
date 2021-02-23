@@ -1,4 +1,5 @@
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using track_a_report_service.Data;
 
 namespace track_a_report_service.Service
@@ -9,12 +10,16 @@ namespace track_a_report_service.Service
 
         public AssetEnquiriesService(InthubContext db) => _db = db;
 
-        public void CreateAssetEnquiry()
+        public async Task CreateAssetEnquiry()
         {
-            //Check the id does not exist already and throw
-            var assetEnquiry = _db.AssetEnquiries.Where(_ => _.ExternalReference.Equals("REPLACE-ME")).FirstOrDefault();
+            var assetEnquiry = await _db.AssetEnquiries.SingleOrDefaultAsync(_ => _.ExternalReference.Equals("CHANGE-ME"));
 
-            //If it doesent add it
+            if(assetEnquiry != null)
+                throw new System.Exception("Asset already exists with reference");
+
+            _db.AssetEnquiries.Add(new AssetEnquiries{ ExternalReference = "CHANGE-ME", AssetId = "CHANGE-ME", AssetType = "CHANGE-ME" });
+
+            await _db.SaveChangesAsync();
         }
     }
 }

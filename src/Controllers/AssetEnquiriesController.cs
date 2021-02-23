@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
 using track_a_report_service.Service;
@@ -14,8 +15,12 @@ namespace track_a_report_service.Controllers
         public AssetEnquiriesController(IAssetEnquiriesService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post()
         {
+            if(!ModelState.IsValid)
+                return BadRequest();
+
+            await _assetEnquiriesService.CreateAssetEnquiry();
             return Ok();
         }
     }
