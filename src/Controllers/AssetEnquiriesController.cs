@@ -11,12 +11,11 @@ namespace track_a_report_service.Controllers
     public class AssetEnquiriesController : ControllerBase
     {
         private readonly IAssetEnquiriesService _assetEnquiriesService;
-        public AssetEnquiriesController(IAssetEnquiriesService assetEnquiriesService) => assetEnquiriesService = _assetEnquiriesService;
+        public AssetEnquiriesController(IAssetEnquiriesService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
 
         [HttpPost]
         public IActionResult Post()
         {
-
             return Ok();
         }
     }
