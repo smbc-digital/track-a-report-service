@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
-using StockportGovUK.AspNetCore.Availability.Managers;
 
 namespace track_a_report_service.Controllers
 {
@@ -10,12 +9,7 @@ namespace track_a_report_service.Controllers
     [TokenAuthentication]
     public class HomeController : ControllerBase
     {
-        private IAvailabilityManager _availabilityManager;
-        
-        public HomeController(IAvailabilityManager availabilityManager)
-        {
-            _availabilityManager = availabilityManager;
-        }
+        public HomeController(){}
 
         [HttpGet]
         public IActionResult Get()

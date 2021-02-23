@@ -1,7 +1,5 @@
 using track_a_report_service.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using StockportGovUK.AspNetCore.Availability.Managers;
 using Xunit;
 
 namespace track_a_report_service_tests.Controllers
@@ -9,11 +7,10 @@ namespace track_a_report_service_tests.Controllers
     public class HomeControllerTests
     {
         private readonly HomeController _homeController;
-        private readonly Mock<IAvailabilityManager> _mockAvailabilityManager = new Mock<IAvailabilityManager>();
 
         public HomeControllerTests()
         {
-            _homeController = new HomeController(_mockAvailabilityManager.Object);
+            _homeController = new HomeController();
         }
 
         [Fact]
@@ -31,11 +28,6 @@ namespace track_a_report_service_tests.Controllers
         [Fact]
         public void Post_ShouldReturnOK()
         {
-            // Arrange
-            _mockAvailabilityManager
-                .Setup(_ => _.IsFeatureEnabled(It.IsAny<string>()))
-                .ReturnsAsync(true);
-
             // Act
             var response = _homeController.Post();
             var statusResponse = response as OkResult;
