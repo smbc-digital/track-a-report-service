@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using track_a_report_service.Data;
 using Microsoft.EntityFrameworkCore;
+using track_a_report_service.Service;
 
 namespace track_a_report_service
 {
@@ -28,6 +29,7 @@ namespace track_a_report_service
             services.AddDbContext<InthubContext>(_ => _
                         .UseSqlServer(Configuration.GetConnectionString("AssetEnquiries")), ServiceLifetime.Transient);
             services.AddSwagger();
+            services.AddTransient<IAssetEnquiriesService, AssetEnquiriesService>();
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
         }

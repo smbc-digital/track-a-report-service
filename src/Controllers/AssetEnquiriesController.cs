@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
+using track_a_report_service.Service;
 
 namespace track_a_report_service.Controllers
 {
@@ -9,11 +10,13 @@ namespace track_a_report_service.Controllers
     [TokenAuthentication]
     public class AssetEnquiriesController : ControllerBase
     {
-        public AssetEnquiriesController(){}
+        private readonly IAssetEnquiriesService _assetEnquiriesService;
+        public AssetEnquiriesController(IAssetEnquiriesService assetEnquiriesService) => assetEnquiriesService = _assetEnquiriesService;
 
         [HttpPost]
         public IActionResult Post()
         {
+
             return Ok();
         }
     }
