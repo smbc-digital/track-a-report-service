@@ -1,7 +1,7 @@
-<h1 align="center">Service name</h1>
+<h1 align="center">Track a report-service</h1>
 
 <div align="center">
-  :neckbeard: :books: :office:
+  :eyes: :railway_track: :page_facing_up: 
 </div>
 <div align="center">
   Service tag line
@@ -44,13 +44,8 @@
 - [License](#license)
 
 ## Requirements
-
-
-## Installation
-
-
-## Server_Integration
-
+  - dotnet core 3.1
+  - GPG key added to collaborators
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
