@@ -1,16 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using track_a_report_service.Utils.HealthChecks;
 using track_a_report_service.Utils.ServiceCollectionExtensions;
-using track_a_report_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StockportGovUK.AspNetCore.Availability;
-using StockportGovUK.AspNetCore.Availability.Middleware;
-using StockportGovUK.NetStandard.Gateways;
-using StockportGovUK.NetStandard.Gateways.Extensions;
+using track_a_report_service.Data;
+using Microsoft.EntityFrameworkCore;
+using track_a_report_service.Exceptions;
+using track_a_report_service.Services;
 
 namespace track_a_report_service
 {
@@ -26,35 +25,28 @@ namespace track_a_report_service
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()))
                     .AddNewtonsoftJson();
-            services.AddStorageProvider(Configuration);
-            services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
-            services.AddAvailability();
+            services.AddDbContext<InthubContext>(_ => _
+                        .UseSqlServer(Configuration.GetConnectionString("AssetEnquiries")), ServiceLifetime.Transient);
             services.AddSwagger();
+            services.AddTransient<IAssetEnquiryService, AssetEnquiryService>();
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseExceptionHandler($"/api/v1/error{(env.IsDevelopment() ? "/local" : string.Empty)}");
-
-            app.UseMiddleware<Availability>();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-            
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
-            
-            app.UseHealthChecks("/healthcheck", HealthCheckConfig.Options);
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("v1/swagger.json", "track_a_report_service API");
-            });
+            app.UseExceptionHandler($"/api/v1/error{(env.IsDevelopment() ? "/local" : string.Empty)}")
+                .UseHttpsRedirection()
+                .UseRouting()
+                .UseEndpoints(endpoints => endpoints.MapControllers())
+                .UseHealthChecks("/healthcheck", HealthCheckConfig.Options)
+                .UseSwagger()
+                .UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("v1/swagger.json", "Track a report service API");
+                });
         }
     }
 }
