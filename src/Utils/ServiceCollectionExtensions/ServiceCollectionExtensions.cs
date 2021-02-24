@@ -10,7 +10,7 @@ namespace track_a_report_service.Utils.ServiceCollectionExtensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "track_a_report_service API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Track a report service API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
