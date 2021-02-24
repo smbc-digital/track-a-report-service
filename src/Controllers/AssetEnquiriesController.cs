@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace track_a_report_service.Controllers
     [TokenAuthentication]
     public class AssetEnquiriesController : ControllerBase
     {
-        private readonly IAssetEnquiriesService _assetEnquiriesService;
-        public AssetEnquiriesController(IAssetEnquiriesService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
+        private readonly IAssetEnquiryService _assetEnquiriesService;
+        public AssetEnquiriesController(IAssetEnquiryService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
 
         /// <summary>
         /// Adds an asset enquiry to the database
@@ -23,7 +24,7 @@ namespace track_a_report_service.Controllers
         /// <returns> IActionResult </returns>
         /// <remarks> Adds the asset enquiry to the database if a record for that reference doesn't already exist </remarks>
         /// <response code="204">Success with no content</response>
-        /// <response code="400">Asset enquiry cannot be added</response>
+        /// <response code="400">Track a report request model is not valid</response>
         /// <response code="409">Asset enquiry already exists</response>
         /// <response code="500">An error has occurred while attempting to add the asset enquiry</response>
         [HttpPost]
@@ -31,7 +32,7 @@ namespace track_a_report_service.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post(TrackAReportRequest request)
+        public async Task<IActionResult> Post([Required][FromBody]TrackAReportRequest request)
         {
             if(!ModelState.IsValid)
                 return BadRequest();

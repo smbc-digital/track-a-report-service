@@ -3,7 +3,7 @@ using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
 
 namespace track_a_report_service.Services
 {
-    public interface IAssetEnquiriesService
+    public interface IAssetEnquiryService
     {
         Task CreateAssetEnquiry(TrackAReportRequest request);
     }

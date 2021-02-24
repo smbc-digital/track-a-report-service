@@ -18,7 +18,6 @@ namespace track_a_report_service.Exceptions
 
             switch (exceptionType)
             {
-                case AssetBadRequestException _:
                 case AssetAlreadyExistsException _:
                     var exception = exceptionType as HttpResponseException;
                     context.Result = new ObjectResult(exception.Message)

@@ -5,12 +5,13 @@ using Moq;
 using StockportGovUK.NetStandard.Models.Enums;
 using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
 using track_a_report_service.Services;
+using System.Threading.Tasks;
 
 namespace track_a_report_service_tests.Controllers
 {
     public class AssetEnquiriesControllerTests
     {
-        private readonly Mock<IAssetEnquiriesService> _mockAssetEnquiriesService = new Mock<IAssetEnquiriesService>();
+        private readonly Mock<IAssetEnquiryService> _mockAssetEnquiriesService = new Mock<IAssetEnquiryService>();
         private readonly AssetEnquiriesController _homeController;
 
         public AssetEnquiriesControllerTests()
@@ -19,21 +20,33 @@ namespace track_a_report_service_tests.Controllers
         }
         
         [Fact]
-        public void Post_ShouldReturnNoContent()
+        public async Task Post_ShouldReturn_NoContent_OnSuccessful_Call()
         {
             // Act
-            var response = _homeController.Post(new TrackAReportRequest
+            var response = await _homeController.Post(new TrackAReportRequest
             {
                 AssetId = "assetId",
                 AssetType = EAssetType.StreetLightFault,
                 ReferenceNumber = "ReferenceNumber"
             });
 
-            var statusResponse = response.Result as NoContentResult;
-            
             // Assert
+            var statusResponse = Assert.IsType<NoContentResult>(response);
             Assert.NotNull(statusResponse);
             Assert.Equal(204, statusResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task Post_ShouldReturn_BadRequest_WhenModel_IsNotValid()
+        {
+            // Act
+            _homeController.ModelState.AddModelError("ReferenceNumber", "imvalid reference");
+            var response = await _homeController.Post(new TrackAReportRequest());
+
+            // Assert
+            var statusResponse = Assert.IsType<BadRequestResult>(response);
+            Assert.NotNull(statusResponse);
+            Assert.Equal(400, statusResponse.StatusCode);
         }
     }
 }

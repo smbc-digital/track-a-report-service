@@ -30,7 +30,7 @@ namespace track_a_report_service
             services.AddDbContext<InthubContext>(_ => _
                         .UseSqlServer(Configuration.GetConnectionString("AssetEnquiries")), ServiceLifetime.Transient);
             services.AddSwagger();
-            services.AddTransient<IAssetEnquiriesService, AssetEnquiriesService>();
+            services.AddTransient<IAssetEnquiryService, AssetEnquiryService>();
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
         }
