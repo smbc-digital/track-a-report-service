@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace track_a_report_service_tests.Controllers
 {
-    public class AssetEnquiriesControllerTests
+    public class AssetEnquiryControllerTests
     {
         private readonly Mock<IAssetEnquiryService> _mockAssetEnquiriesService = new Mock<IAssetEnquiryService>();
-        private readonly AssetEnquiriesController _homeController;
+        private readonly AssetEnquiryController _homeController;
 
-        public AssetEnquiriesControllerTests()
+        public AssetEnquiryControllerTests()
         {
-            _homeController = new AssetEnquiriesController(_mockAssetEnquiriesService.Object);
+            _homeController = new AssetEnquiryController(_mockAssetEnquiriesService.Object);
         }
         
         [Fact]

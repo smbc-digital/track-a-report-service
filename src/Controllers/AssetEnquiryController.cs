@@ -12,10 +12,10 @@ namespace track_a_report_service.Controllers
     [Route("api/v1/[Controller]")]
     [ApiController]
     [TokenAuthentication]
-    public class AssetEnquiriesController : ControllerBase
+    public class AssetEnquiryController : ControllerBase
     {
         private readonly IAssetEnquiryService _assetEnquiriesService;
-        public AssetEnquiriesController(IAssetEnquiryService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
+        public AssetEnquiryController(IAssetEnquiryService assetEnquiriesService) => _assetEnquiriesService = assetEnquiriesService;
 
         /// <summary>
         /// Adds an asset enquiry to the database
