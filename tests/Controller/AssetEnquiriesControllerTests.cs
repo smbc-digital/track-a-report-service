@@ -2,7 +2,9 @@ using track_a_report_service.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using Moq;
-using track_a_report_service.Service;
+using StockportGovUK.NetStandard.Models.Enums;
+using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
+using track_a_report_service.Services;
 
 namespace track_a_report_service_tests.Controllers
 {
@@ -17,15 +19,21 @@ namespace track_a_report_service_tests.Controllers
         }
         
         [Fact]
-        public void Post_ShouldReturnOK()
+        public void Post_ShouldReturnNoContent()
         {
             // Act
-            var response = _homeController.Post();
-            var statusResponse = response as OkResult;
+            var response = _homeController.Post(new TrackAReportRequest
+            {
+                AssetId = "assetId",
+                AssetType = EAssetType.StreetLightFault,
+                ReferenceNumber = "ReferenceNumber"
+            });
+
+            var statusResponse = response.Result as NoContentResult;
             
             // Assert
             Assert.NotNull(statusResponse);
-            Assert.Equal(200, statusResponse.StatusCode);
+            Assert.Equal(204, statusResponse.StatusCode);
         }
     }
 }

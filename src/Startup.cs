@@ -8,7 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using track_a_report_service.Data;
 using Microsoft.EntityFrameworkCore;
-using track_a_report_service.Service;
+using track_a_report_service.Exceptions;
+using track_a_report_service.Services;
 
 namespace track_a_report_service
 {
@@ -24,7 +25,7 @@ namespace track_a_report_service
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()))
                     .AddNewtonsoftJson();
             services.AddDbContext<InthubContext>(_ => _
                         .UseSqlServer(Configuration.GetConnectionString("AssetEnquiries")), ServiceLifetime.Transient);
