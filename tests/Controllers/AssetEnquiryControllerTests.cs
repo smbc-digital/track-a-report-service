@@ -2,8 +2,8 @@ using track_a_report_service.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using Moq;
-using StockportGovUK.NetStandard.Models.Enums;
-using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
+using StockportGovUK.NetStandard.Gateways.Enums;
+using StockportGovUK.NetStandard.Gateways.Models.TrackAReport.Requests;
 using track_a_report_service.Services;
 using System.Threading.Tasks;
 

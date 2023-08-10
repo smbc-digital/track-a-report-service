@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
-using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
+using StockportGovUK.NetStandard.Gateways.Models.TrackAReport.Requests;
 using track_a_report_service.Services;
 
 namespace track_a_report_service.Controllers
