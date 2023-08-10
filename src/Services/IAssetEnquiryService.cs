@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
+using StockportGovUK.NetStandard.Gateways.Models.TrackAReport.Requests;
 
 namespace track_a_report_service.Services
 {
