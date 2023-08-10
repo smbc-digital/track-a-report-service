@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using StockportGovUK.NetStandard.Models.Enums;
+using StockportGovUK.NetStandard.Gateways.Enums;
 using track_a_report_service.Data;
 using track_a_report_service_tests.Constants;
 

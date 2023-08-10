@@ -3,12 +3,12 @@ using track_a_report_service.Services;
 using System.Threading.Tasks;
 using track_a_report_service.Data;
 using Microsoft.EntityFrameworkCore;
-using StockportGovUK.NetStandard.Models.TrackAReport.Requests;
+using StockportGovUK.NetStandard.Gateways.Models.TrackAReport.Requests;
 using track_a_report_service_tests.Constants;
 using track_a_report_service.Constants;
 using track_a_report_service.Exceptions;
 using System.Linq;
-using StockportGovUK.NetStandard.Models.Enums;
+using StockportGovUK.NetStandard.Gateways.Enums;
 
 namespace track_a_report_service_tests.Services
 {
